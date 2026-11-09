@@ -10,9 +10,12 @@ services:
       - PALANTIDY_PORT=7000
       - PALANTIDY_DB_PATH=/app/data/moria.db
       - SYNC_INTERVAL_HOURS=12     # Checks for new movies/episodes every 12 hours
-      # Optional: Set global default Debrid keys here or configure in the Web UI
-      # - REALDEBRID_API_KEY=tu_api_key_aqui
-      # - ALLDEBRID_API_KEY=tu_api_key_aqui
     volumes:
-      # Persist database and sync state across container updates
       - ./data:/app/data
+
+  # Cloudflare Tunnel: Gives Palantidy an official, secure HTTPS URL (No port forwarding or SSL setup needed)
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: palantidy-tunnel
+    restart: unless-stopped
+    command: tunnel --no-autoupdate --url http://palantidy:7000

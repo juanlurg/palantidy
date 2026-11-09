@@ -34,7 +34,14 @@ def main():
     print(f"  Stremio Addon:   stremio://localhost:{args.port}/manifest.json")
     print(f"=======================================================\n")
 
-    uvicorn.run("src.addon:app", host=args.host, port=args.port, reload=args.reload)
+    uvicorn.run(
+        "src.addon:app",
+        host=args.host,
+        port=args.port,
+        reload=args.reload,
+        proxy_headers=True,
+        forwarded_allow_ips="*"
+    )
 
 if __name__ == "__main__":
     main()
