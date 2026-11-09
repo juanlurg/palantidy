@@ -1,0 +1,18 @@
+services:
+  palantidy:
+    build: .
+    container_name: palantidy
+    restart: unless-stopped
+    ports:
+      - "7000:7000"
+    environment:
+      - PALANTIDY_HOST=0.0.0.0
+      - PALANTIDY_PORT=7000
+      - PALANTIDY_DB_PATH=/app/data/moria.db
+      - SYNC_INTERVAL_HOURS=12     # Checks for new movies/episodes every 12 hours
+      # Optional: Set global default Debrid keys here or configure in the Web UI
+      # - REALDEBRID_API_KEY=tu_api_key_aqui
+      # - ALLDEBRID_API_KEY=tu_api_key_aqui
+    volumes:
+      # Persist database and sync state across container updates
+      - ./data:/app/data

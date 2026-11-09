@@ -1,0 +1,17 @@
+[Unit]
+Description=Palantidy - Stremio Addon for Palantir Catalog
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/palantidy
+ExecStart=/opt/palantidy/venv/bin/python main.py
+Restart=always
+RestartSec=10
+Environment=PALANTIDY_HOST=0.0.0.0
+Environment=PALANTIDY_PORT=7000
+Environment=SYNC_INTERVAL_HOURS=12
+
+[Install]
+WantedBy=multi-user.target

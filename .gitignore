@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.db
+*.zip
+temp_moria.zip
+data/
+last_sync.json
+.env
+research/
+.venv/
+env/
+venv/
